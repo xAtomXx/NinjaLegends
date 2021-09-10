@@ -1,0 +1,296 @@
+-- created by Kev#1422
+-- DiscordServer https://discord.gg/SAAYvn92UA
+-- Gui to Lua
+-- Version: 3.2
+
+-- Instances:
+
+local NinjaLegendsGUI = Instance.new("ScreenGui")
+local Main = Instance.new("Frame")
+local ScrollingFrame = Instance.new("ScrollingFrame")
+local AutoFarm = Instance.new("TextButton")
+local UICorner = Instance.new("UICorner")
+local UICorner_2 = Instance.new("UICorner")
+local AutoFarmOff = Instance.new("TextButton")
+local UICorner_3 = Instance.new("UICorner")
+local KillAll = Instance.new("TextButton")
+local UICorner_4 = Instance.new("UICorner")
+local UnlockAllIslands = Instance.new("TextButton")
+local UICorner_5 = Instance.new("UICorner")
+local VoidGui = Instance.new("TextLabel")
+local UICorner_6 = Instance.new("UICorner")
+local NinjaLegends = Instance.new("TextLabel")
+local UICorner_7 = Instance.new("UICorner")
+local UICorner_8 = Instance.new("UICorner")
+local Credits = Instance.new("TextLabel")
+local DiscordServer = Instance.new("TextLabel")
+
+--Properties:
+
+NinjaLegendsGUI.Name = "NinjaLegendsGUI"
+NinjaLegendsGUI.Parent = game.CoreGui
+NinjaLegendsGUI.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+
+Main.Name = "Main"
+Main.Parent = NinjaLegendsGUI
+Main.BackgroundColor3 = Color3.fromRGB(49, 49, 49)
+Main.Position = UDim2.new(0.270511776, 0, 0.294032007, 0)
+Main.Size = UDim2.new(0, 565, 0, 255)
+Main.Active = true
+Main.Draggable = true
+
+ScrollingFrame.Parent = Main
+ScrollingFrame.Active = true
+ScrollingFrame.BackgroundColor3 = Color3.fromRGB(31, 31, 31)
+ScrollingFrame.Position = UDim2.new(0, 0, 0.196078435, 0)
+ScrollingFrame.Size = UDim2.new(0, 243, 0, 205)
+
+AutoFarm.Name = "AutoFarm"
+AutoFarm.Parent = ScrollingFrame
+AutoFarm.BackgroundColor3 = Color3.fromRGB(0, 0, 255)
+AutoFarm.BorderSizePixel = 0
+AutoFarm.Position = UDim2.new(0.0762711838, 0, 0.0235294122, 0)
+AutoFarm.Size = UDim2.new(0, 200, 0, 50)
+AutoFarm.Font = Enum.Font.SourceSans
+AutoFarm.Text = "AutoFarm"
+AutoFarm.TextColor3 = Color3.fromRGB(0, 0, 0)
+AutoFarm.TextScaled = true
+AutoFarm.TextSize = 14.000
+AutoFarm.TextWrapped = true
+AutoFarm.MouseButton1Click:connect(function()
+    _G.LULU = true--change to true or false
+
+UICorner.Parent = AutoFarm
+
+UICorner_2.Parent = ScrollingFrame
+
+AutoFarmOff.Name = "AutoFarmOff"
+AutoFarmOff.Parent = ScrollingFrame
+AutoFarmOff.BackgroundColor3 = Color3.fromRGB(0, 0, 255)
+AutoFarmOff.BorderSizePixel = 0
+AutoFarmOff.Position = UDim2.new(0.0762711838, 0, 0.150980398, 0)
+AutoFarmOff.Size = UDim2.new(0, 200, 0, 50)
+AutoFarmOff.Font = Enum.Font.SourceSans
+AutoFarmOff.Text = "AutoFarmOff"
+AutoFarmOff.TextColor3 = Color3.fromRGB(0, 0, 0)
+AutoFarmOff.TextScaled = true
+AutoFarmOff.TextSize = 14.000
+AutoFarmOff.TextWrapped = true
+AutoFarmOff.MouseButton1Click:connect(function()
+    _G.LULU = false--change to true or false
+    end)
+
+UICorner_3.Parent = AutoSell
+
+KillAll.Name = "KillAll"
+KillAll.Parent = ScrollingFrame
+KillAll.BackgroundColor3 = Color3.fromRGB(0, 0, 255)
+KillAll.BorderSizePixel = 0
+KillAll.Position = UDim2.new(0.0762711838, 0, 0.282352954, 0)
+KillAll.Size = UDim2.new(0, 200, 0, 50)
+KillAll.Font = Enum.Font.SourceSans
+KillAll.Text = "KillAll"
+KillAll.TextColor3 = Color3.fromRGB(0, 0, 0)
+KillAll.TextScaled = true
+KillAll.TextSize = 14.000
+KillAll.TextWrapped = true
+KillAll.MouseButton1Click:connect(function()
+	local VirtualUser = game:GetService("VirtualUser")
+	local players = game.Players:GetPlayers()
+	local player = game.Players.LocalPlayer
+	local soulType = "Bad" -- Good or Bad , Change this only
+	local lplr = ""
+	local jplr = ""
+	_G.Enabled = true
+
+	local function check()
+		for i,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do 
+			if v.ClassName == "Tool" and v:FindFirstChild("attackKatanaScript") then 
+				game.Players.LocalPlayer.Character.Humanoid:EquipTool(v)                            
+			end
+		end
+	end
+
+	while _G.Enabled and wait(.4) do
+		if workspace[player.Name]:FindFirstChild("Head") then
+			if workspace[player.Name].Head:FindFirstChild("nameGui") then
+				workspace[player.Name].Head.nameGui:Destroy()
+			end
+		end
+		player.ninjaEvent:FireServer("goInvisible")
+		if player.Character:FindFirstChild("inSafezone") then
+			player.Character.HumanoidRootPart.CFrame = player.Character.HumanoidRootPart.CFrame + Vector3.new(0,200,0)
+		end
+		if game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart") then
+			game.Players.PlayerRemoving:Connect(function(player)
+				lplr = (player.Name)
+				players = game.Players:GetPlayers()
+			end)
+
+			game.Players.PlayerAdded:Connect(function(player)
+				jplr = (player.Name)
+				players = game.Players:GetPlayers()
+			end)
+
+			players = game.Players:GetPlayers()
+			game:service'RunService'.Stepped:Connect(function()
+				if player.Character and player.Character:FindFirstChildOfClass("Humanoid") then
+					player.Character.Humanoid:ChangeState(11)
+				end
+			end)
+			for _, v in pairs(players) do
+				if v.Name ~= player.Name and v.Name ~= lplr and v.Name ~= jplr and workspace:FindFirstChild(v.Name) and workspace[v.Name]:FindFirstChild("Head") then
+					if v.Name ~= game.Players.LocalPlayer.Name and not v.Character:FindFirstChild("inSafezone") then
+						v.Character.Head.CanCollide = false
+						v.Character.Head.Anchored = true
+						v.Character.Head.Position = player.Character.HumanoidRootPart.Position + Vector3.new(4.5,0,0)
+					elseif v.Name ~= game.Players.LocalPlayer.Name and v.Character:FindFirstChild("inSafezone") then
+						v.Character.Head.CFrame = player.Character.HumanoidRootPart.CFrame + Vector3.new(0,20,0)
+					end
+				end
+			end
+
+			if player.Character:FindFirstChildOfClass("Tool") then
+				player.Character:FindFirstChildOfClass("Tool"):Activate()
+			end
+
+			for _,v in pairs(game.Workspace.soulPartsFolder:GetChildren()) do
+				if v.Name == "soulPart" and v.collectPlayers:FindFirstChild(player.Name) then
+					if not v:FindFirstChild("isGoodKarma") and soulType == "Bad" then
+						player.Character.HumanoidRootPart.CFrame = v.CFrame + Vector3.new(0,5,0)
+						player.ninjaEvent:FireServer("collectSoul", v)
+					elseif v:FindFirstChild("isGoodKarma") and soulType == "Good" then 
+						player.Character.HumanoidRootPart.CFrame = v.CFrame + Vector3.new(0,5,0)
+						player.ninjaEvent:FireServer("collectSoul", v)
+					end
+				end
+			end
+			check()
+		end
+	end
+end)
+
+UICorner_4.Parent = KillAll
+
+UnlockAllIslands.Name = "UnlockAllIslands"
+UnlockAllIslands.Parent = ScrollingFrame
+UnlockAllIslands.BackgroundColor3 = Color3.fromRGB(0, 0, 255)
+UnlockAllIslands.BorderSizePixel = 0
+UnlockAllIslands.Position = UDim2.new(0.0762711838, 0, 0.423529416, 0)
+UnlockAllIslands.Size = UDim2.new(0, 200, 0, 50)
+UnlockAllIslands.Font = Enum.Font.SourceSans
+UnlockAllIslands.Text = "UnlockAllIslands"
+UnlockAllIslands.TextColor3 = Color3.fromRGB(0, 0, 0)
+UnlockAllIslands.TextScaled = true
+UnlockAllIslands.TextSize = 14.000
+UnlockAllIslands.TextWrapped = true
+UnlockAllIslands.MouseButton1Click:connect(function()
+	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game:GetService("Workspace").islandUnlockParts["Enchanted Island"].CFrame
+	wait(.7)
+	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game:GetService("Workspace").islandUnlockParts["Astral Island"].CFrame
+	wait(.7)
+	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game:GetService("Workspace").islandUnlockParts["Mystical Island"].CFrame
+	wait(.7)
+	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game:GetService("Workspace").islandUnlockParts["Space Island"].CFrame
+	wait(.7)
+	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game:GetService("Workspace").islandUnlockParts["Tundra Island"].CFrame
+	wait(.7)
+	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game:GetService("Workspace").islandUnlockParts["Eternal Island"].CFrame
+	wait(.7)
+	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game:GetService("Workspace").islandUnlockParts["Sandstorm"].CFrame
+	wait(.7)
+	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game:GetService("Workspace").islandUnlockParts["Thunderstorm"].CFrame
+	wait(.7)
+	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game:GetService("Workspace").islandUnlockParts["Ancient Inferno Island"].CFrame
+	wait(.7)
+	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game:GetService("Workspace").islandUnlockParts["Midnight Shadow Island"].CFrame
+	wait(.7)
+	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game:GetService("Workspace").islandUnlockParts["Mythical Souls Island"].CFrame
+	wait(.7)
+	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game:GetService("Workspace").islandUnlockParts["Winter Wonder Island"].CFrame
+	wait(.7)
+	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game:GetService("Workspace").islandUnlockParts["Golden Master Island"].CFrame
+	wait(.7)
+	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game:GetService("Workspace").islandUnlockParts["Dragon Legend Island"].CFrame
+	wait(.7)
+	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game:GetService("Workspace").islandUnlockParts["Cybernetic Legends Island"].CFrame
+	wait(.7)
+	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game:GetService("Workspace").islandUnlockParts["Skystorm Ultraus Island"].CFrame
+	wait(.7)
+	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game:GetService("Workspace").islandUnlockParts["Chaos Legends Island"].CFrame
+	wait(.7)
+	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game:GetService("Workspace").islandUnlockParts["Soul Fusion Island"].CFrame
+	wait(7.)
+	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game:GetService("Workspace").islandUnlockParts["Dark Elements Island"].CFrame
+	wait(7.)
+	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game:GetService("Workspace").islandUnlockParts["Inner Peace Island"].CFrame
+	wait(7.)
+	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game:GetService("Workspace").islandUnlockParts["Blazing Vortex Island"].CFrame
+end)
+
+UICorner_5.Parent = UnlockAllIslands
+
+VoidGui.Name = "VoidGui"
+VoidGui.Parent = Main
+VoidGui.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+VoidGui.BorderSizePixel = 0
+VoidGui.Size = UDim2.new(0, 208, 0, 50)
+VoidGui.Font = Enum.Font.SourceSans
+VoidGui.Text = "VoidGui       "
+VoidGui.TextColor3 = Color3.fromRGB(0, 143, 0)
+VoidGui.TextScaled = true
+VoidGui.TextSize = 14.000
+VoidGui.TextWrapped = true
+
+UICorner_6.Parent = VoidGui
+
+NinjaLegends.Name = "NinjaLegends"
+NinjaLegends.Parent = Main
+NinjaLegends.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+NinjaLegends.BorderSizePixel = 0
+NinjaLegends.Position = UDim2.new(0.345132738, 0, 0, 0)
+NinjaLegends.Size = UDim2.new(0, 370, 0, 50)
+NinjaLegends.Font = Enum.Font.SourceSans
+NinjaLegends.Text = "NinjaLegends"
+NinjaLegends.TextColor3 = Color3.fromRGB(0, 0, 255)
+NinjaLegends.TextScaled = true
+NinjaLegends.TextSize = 14.000
+NinjaLegends.TextWrapped = true
+
+UICorner_7.Parent = NinjaLegends
+
+UICorner_8.Parent = Main
+
+Credits.Name = "Credits"
+Credits.Parent = Main
+Credits.BackgroundColor3 = Color3.fromRGB(49, 49, 49)
+Credits.BorderSizePixel = 0
+Credits.Position = UDim2.new(0.43008849, 0, 0.196078435, 0)
+Credits.Size = UDim2.new(0, 322, 0, 77)
+Credits.Font = Enum.Font.SourceSans
+Credits.Text = "This script is fully created by Kevv#1422"
+Credits.TextColor3 = Color3.fromRGB(0, 0, 0)
+Credits.TextSize = 25.000
+Credits.TextWrapped = true
+
+DiscordServer.Name = "Discord Server"
+DiscordServer.Parent = Main
+DiscordServer.BackgroundColor3 = Color3.fromRGB(49, 49, 49)
+DiscordServer.BorderSizePixel = 0
+DiscordServer.Position = UDim2.new(0.43008849, 0, 0.498039216, 0)
+DiscordServer.Size = UDim2.new(0, 322, 0, 128)
+DiscordServer.Font = Enum.Font.SourceSans
+DiscordServer.Text = "Join the Void Discord Server: https://discord.gg/SAAYvn92UA"
+DiscordServer.TextColor3 = Color3.fromRGB(0, 0, 0)
+DiscordServer.TextSize = 25.000
+DiscordServer.TextWrapped = true
+
+
+   while _G.LULU do
+wait()--change time if you want
+if game.Players.LocalPlayer.Character:FindFirstChildOfClass("Tool") then
+game.Players.LocalPlayer.Character:FindFirstChildOfClass("Tool"):Activate()
+end
+end
+
+end)
